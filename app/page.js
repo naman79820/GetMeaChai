@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <div>
@@ -7,7 +8,7 @@ export default function Home() {
         <h1 className="text-5xl flex items-center">
           Buy Me a Chai{" "}
           <span>
-            <img src="/chai1.1.gif" className="object-fill" alt="" autoplay />
+            <img src="/chai1.1.gif" className="object-fill relative right-[30px]" alt="" autoplay />
           </span>
         </h1>
 
