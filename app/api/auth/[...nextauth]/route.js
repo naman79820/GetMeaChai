@@ -1,3 +1,4 @@
+
 import NextAuth from "next-auth";
 
 // import AppleProvider from "next-auth/providers/apple";
@@ -5,6 +6,10 @@ import NextAuth from "next-auth";
 // import GoogleProvider from "next-auth/providers/google";
 // import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github"
+import mongoose from "mongoose";
+import User from "@/models/User";
+import Payment from "@/models/Payment";
+import connectDB from "@/db/connectDb";
 
 export const authoption = NextAuth({
   providers: [
@@ -32,6 +37,49 @@ export const authoption = NextAuth({
     //   from: "NextAuth.js <no-reply@example.com>",
     // }),
   ],
-});
-export {authoption as GET , authoption as POST}
+   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account.provider === 'github') {
+        try {
+          await connectDB();
+          console.log('Connected to MongoDB');
+
+          // Logging inputs to diagnose issues
+          console.log('User:', user);
+          console.log('Account:', account);
+          console.log('Profile:', profile);
+          console.log('Email:', email);
+
+          // Extract email from profile if not provided
+          const userEmail = email || profile.email;
+          if (!userEmail) {
+            throw new Error('Email not available from GitHub profile');
+          }
+
+          const currentUser = await User.findOne({ email: userEmail });
+          if (!currentUser) {
+            const newUser = new User({
+              email: userEmail,
+              username: userEmail.split('@')[0],
+            });
+            await newUser.save();
+            user.name = newUser.username;
+            console.log(newUser + "hii");
+          } else {
+            user.name = currentUser.username;
+          }
+
+          return true;
+        } catch (error) {
+          console.error('Error in signIn callback:', error);
+          return false;
+        }
+      }
+      return true;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+})
+
+export { authoption as GET, authoption as POST };
 

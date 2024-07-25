@@ -42,17 +42,17 @@ export default function Home() {
         </div>
         <div className="flex  items-center justify-evenly  mt-10 min-h-[15vw]">
           <span className="text-white    flex  flex-col items-center">
-            <img src="/support1.gif" className="w-[11rem] " alt="" />
+            <img src="/support1.gif" className="w-[10un drem] " alt="" />
             <p className="font-bold mt-2">Fans want to help</p>
             <p className="mt-2">Your fans are available to help you.</p>
           </span>
           <span className="text-white   flex  flex-col items-center">
-            <img src="/bitcoin.gif" className="w-[11rem]" alt="" />
+            <img src="/bitcoin.gif" className="w-[10rem]" alt="" />
             <p className="font-bold  ">Fans wants to contribute</p>
             <p className="mt-2">Your fans wants to contribute financially.</p>
           </span>
           <span className="text-white  flex flex-col items-center ]">
-            <img src="/collaborate.gif" className="w-[11rem]" alt="" />
+            <img src="/collaborate.gif" className="w-[10rem]" alt="" />
             <p className="font-bold ">Fans wants to collaborate</p>
             <p className="mt-2">Your fans are ready to collaborate with you.</p>
           </span>
