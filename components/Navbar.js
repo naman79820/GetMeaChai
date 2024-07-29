@@ -18,7 +18,7 @@ const Navbar = () => {
   //   </>
   // }
   return (
-    <nav className="w-full">
+    <nav className="w-full fixed z-10">
       <div className="  h-12 flex justify-between px-4">
         <Link
           href="/"

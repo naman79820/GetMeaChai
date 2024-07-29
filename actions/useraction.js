@@ -22,13 +22,29 @@ return x
 }
 export const fetchuser = async (username)=>{
 await connectDB()
-let u = await User.findOne({username: username})
+let u = await User.findOne({username: username})            
 let user = u.toObject({flattenObjectIds: true})
 return user
 }
 
 export const fetchpayments = async (username)=>{
     await connectDB()
-    let p = await Payment.find({to_user: username}).sort({amount:-1}).lean()
+    let p = await Payment.find({to_user: username , done:true}).sort({amount:-1}).lean()
     return p
+}
+
+export const updateProfile = async (data , oldusername) =>{
+    await connectDB()
+    let ndata =  Object.fromEntries(data)
+
+    if(oldusername!== ndata.username){
+let u = await User.findOne({username: ndata.username})
+if(u){
+    return {error:"Username already exists"}
+}
+    }
+    await User.updateOne({email: ndata.email},ndata)
+     let updatedUser = await fetchuser(ndata.username);
+    return updatedUser;
+
 }

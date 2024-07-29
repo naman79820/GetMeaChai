@@ -6,17 +6,49 @@ import Razorpay from "razorpay";
 import { useSession } from "next-auth/react";
 import { fetchuser } from "@/actions/useraction";
 import { fetchpayments } from "@/actions/useraction";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Bounce } from "react-toastify";
 import { initiate } from "@/actions/useraction";
+import { useRouter } from "next/navigation";
+
+import { useSearchParams } from "next/navigation";
 const PaymentPage = ({ username }) => {
   const [paymentform, setpaymentform] = useState({});
   const [currentUser, setcurrentUser] = useState({})
   const [payments, setpayments] = useState([])
   const { data: session } = useSession();
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
   useEffect(() => {
     
   getData()
    
   }, [])
+
+  useEffect(() => {
+   
+   if(searchParams.get("paymentdone")=="true"){
+    toast('Thanks for the donation :))', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+      });
+      
+     router.push(`/${username}`)
+
+   }
+  
+   
+  }, [])
+  
   
   const handleChange = (e) => {
 
@@ -38,7 +70,7 @@ const PaymentPage = ({ username }) => {
    
     var options = {
       
-      key: process.env.NEXT_PUBLIC_KEY_ID, // Enter the Key ID generated from the Dashboard
+      key: currentUser.razorpayid, // Enter the Key ID generated from the Dashboard
       amount: amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
       name: "Get Me A Chai", //your business name
@@ -72,18 +104,31 @@ const PaymentPage = ({ username }) => {
   };
   return (
     <>
+    <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
    <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <div>
         
         <div className="relative flex flex-col items-center justify-center ">
           <img
-            src="/banner.jpg"
-            className=" w-full h-[45vh] object-cover object-[100%,30%] mt-4"
+            src={currentUser.profilepic || ("/banner.jpg")}
+            className=" w-full h-[45vh] object-cover object-[100%,30%] mt-4 pt-10"
             alt=""
           />
           <div className="flex flex-col r ">
             <img
-              src="/logo.jpg"
+              src={currentUser.coverpic || ("/logo.jpg")}
               className="rounded-full w-40 absolute right-[54.5rem] top-[22rem]"
               alt=""
             />
@@ -100,7 +145,7 @@ const PaymentPage = ({ username }) => {
             </div>
           </div>
           <div className="flex gap-5 mt-5 mb-5">
-            <div className=" w-[35vw] h-[40vh] bg-neutral-700 overflow-auto ">
+            <div className=" w-[35vw] h-[40vh] bg-neutral-700 overflow-auto overflow-x-hidden ">
               <p className="mt-10 ml-7 font-bold text-xl">Supporters</p>
               {payments.length > 0 ? (
     payments.map((p, i) => (
@@ -122,7 +167,7 @@ const PaymentPage = ({ username }) => {
               <div className="w-full">
                 <input
                   onChange={handleChange}
-                  value={paymentform.name}
+                  value={paymentform.name || ""}
                   type="text"
                   name="name"
                   id=""
@@ -131,7 +176,7 @@ const PaymentPage = ({ username }) => {
                 />
                 <input
                   onChange={handleChange}
-                  value={paymentform.message}
+                  value={paymentform.message }
                   type="text"
                   name="message"
                   id=""
@@ -148,10 +193,12 @@ const PaymentPage = ({ username }) => {
                   placeholder="Enter Amount  "
                   className="bg-neutral-900 w-[32vw] ml-7 mx-auto pl-2 h-10 mt-3 rounded-md text-white"
                 />
-                <button  onClick={() => pay(Number.parseInt(paymentform.amount)*100)}
+                <button 
+                 onClick={() => pay(Number.parseInt(paymentform.amount)*100)}
                   type="button"
-                  className="text-gray-900 mt-2 bg-neutral-900 ml-7 w-[32vw] hover:bg-gray-900 focus:ring-4 focus:outline-none
-         focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400
+                  disabled={paymentform.name?.length<3 || paymentform.message?.length<4 || !paymentform.amount}
+                  className=" disabled:bg-black disabled:hover:bg-black text-gray-900 mt-2 bg-neutral-900 ml-7 w-[32vw] hover:bg-gray-900 focus:ring-4 focus:outline-none
+         focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400 disabled:hover:text-gray-400
           dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 "
                 >
                   Pay

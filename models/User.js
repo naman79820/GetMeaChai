@@ -7,8 +7,9 @@ username: {type:String,required:true },
 profilepic: {type:String },
 coverpic: {type:String },
 createdAt: {type:Date , default: Date.now },
-updatedAt: {type:Date , default: Date.now }
-
+updatedAt: {type:Date , default: Date.now },
+razorpayid:{type:String ,required:true},
+razorpaysecret:{type:String ,required:true}
 
 
 })
