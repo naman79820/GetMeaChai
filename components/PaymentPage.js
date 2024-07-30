@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 import { useSearchParams } from "next/navigation";
 const PaymentPage = ({ username }) => {
-  const [paymentform, setpaymentform] = useState({});
+  const [paymentform, setpaymentform] = useState({name:"",message:"",amount:""});
   const [currentUser, setcurrentUser] = useState({})
   const [payments, setpayments] = useState([])
   const { data: session } = useSession();
@@ -169,6 +169,7 @@ theme="dark"
                   onChange={handleChange}
                   value={paymentform.name || ""}
                   type="text"
+                  maxLength={15}
                   name="name"
                   id=""
                   placeholder="Enter Name"
@@ -178,15 +179,17 @@ theme="dark"
                   onChange={handleChange}
                   value={paymentform.message }
                   type="text"
+                  maxLength={30}
                   name="message"
                   id=""
                   placeholder="Enter Message"
                   className="bg-neutral-900 w-[32vw] ml-7 mx-auto pl-2 h-10 mt-3 rounded-md text-white"
                 />
                 <input
-                 
+                  
                   onChange={handleChange}
                   value={paymentform.amount}
+                maxLength={5}
                   type="text"
                   name="amount"
                   id=""
@@ -225,9 +228,10 @@ theme="dark"
                     Pay 25₹
                   </button>
                   <button
+                  disabled={paymentform.name?.length<3 || paymentform.message?.length<4 }
                     onClick={() => pay(5000)}
                     type="button"
-                    disabled={paymentform.name?.length<3 || paymentform.message?.length<4 }
+                 
                     className="disabled:bg-black disabled:hover:bg-black disabled:hover:text-gray-400 text-gray-900 mt-2 bg-neutral-900  w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
          focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400
           dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 "

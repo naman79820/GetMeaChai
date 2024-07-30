@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from 'next/link'
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
           followers. Start now!
         </p>
         <div className="mt-5 ">
+          <Link href="/login">
           <button
             type="button"
             className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none
@@ -25,6 +27,8 @@ export default function Home() {
           >
             Start Here
           </button>
+          </Link>
+          <Link href="/about">
           <button
             type="button"
             className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none
@@ -33,6 +37,7 @@ export default function Home() {
           >
             Read More
           </button>
+          </Link>
         </div>
       </div>
       <div className=" h-1 bg-gray-700"></div>
