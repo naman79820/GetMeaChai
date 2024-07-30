@@ -85,9 +85,9 @@ theme="dark"
         <p className='text-white'>Name</p>
         <input value={form.name?form.name:""} onChange={handleChange} type="text" name="name" id="name"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
         <p className='text-white mt-4'>Email</p>
-        <input value={form.email?form.email:""} onChange={handleChange} type="text" name="email" id="email"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
-        <p className='text-white mt-4'>Username</p>
-        <input value={form.username?form.username:""} onChange={handleChange} type="text" name="username" id="username"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
+        <input value={form.email?form.email:""} onChange={handleChange} disabled  type="text" name="email" id="email"  className='bg-neutral-800 w-[32vw] disabled:hover:cursor-not-allowed  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
+        <p className='text-white mt-4'>Username</p> 
+        <input value={form.username?form.username:""} disabled  onChange={handleChange} type="text" name="username" id="username"  className='bg-neutral-800 w-[32vw] disabled:hover:cursor-not-allowed  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
         <p className='text-white mt-4'>Profile Picture</p>
         <input value={form.profilepic?form.profilepic:""} onChange={handleChange} type="text" name="profilepic" id="profilepic"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
         <p className='text-white mt-4'>Cover picture</p>
@@ -97,7 +97,7 @@ theme="dark"
         <input value={form.razorpayid?form.razorpayid:""} onChange={handleChange}  type="password" name="razorpayid" id="razorpayid"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
         <p className='text-white mt-4'>Razorpay Secret</p>
 
-<input value={form.razorpaysecret?form.razorpaysecret:""} onChange={handleChange}  type="pass" name="razorpaysecret" id="razorpaysecret"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
+<input value={form.razorpaysecret?form.razorpaysecret:""} onChange={handleChange}  type="password" name="razorpaysecret" id="razorpaysecret"  className='bg-neutral-800 w-[32vw]  mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
         <div>
         <button  className='className="text- gray-900  w-[32vw] hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none
          focus:ring-gray-300 font-medium rounded-lg text-sm px-5 mt-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400

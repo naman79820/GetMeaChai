@@ -134,12 +134,12 @@ theme="dark"
             />
             <div>
               <ul className="text-white mt-24 flex flex-col items-center">
-                {username}
+                @{username}
                 <li className="mt-2 text-sm text-gray-400">
-                  Likes to create sites & play games
+                 Lets help {username} get a chai!
                 </li>
                 <li className="mt-5 text-sm text-gray-400">
-                  9,719 members . 1 post . $15,450/release
+                  {payments.length} Payment . ₹{payments.reduce((a,b)=>a +  parseFloat( b.amount) , 0)} raised
                 </li>
               </ul>
             </div>
@@ -207,7 +207,8 @@ theme="dark"
                   <button 
                     onClick={() => pay(1000)}
                     type="button"
-                    className="text-gray-900 mt-2 bg-neutral-900 ml-7 w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
+                    disabled={paymentform.name?.length<3 || paymentform.message?.length<4 }
+                    className="disabled:bg-black disabled:hover:bg-black disabled:hover:text-gray-400 text-gray-900 mt-2 bg-neutral-900 ml-7 w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
          focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400
           dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 "
                   >
@@ -216,7 +217,8 @@ theme="dark"
                   <button
                     onClick={() => pay(2500)}
                     type="button"
-                    className="text-gray-900 mt-2 bg-neutral-900  w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
+                    disabled={paymentform.name?.length<3 || paymentform.message?.length<4 }
+                    className="disabled:bg-black disabled:hover:bg-black disabled:hover:text-gray-400 text-gray-900 mt-2 bg-neutral-900  w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
          focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400
           dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 "
                   >
@@ -225,7 +227,8 @@ theme="dark"
                   <button
                     onClick={() => pay(5000)}
                     type="button"
-                    className="text-gray-900 mt-2 bg-neutral-900  w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
+                    disabled={paymentform.name?.length<3 || paymentform.message?.length<4 }
+                    className="disabled:bg-black disabled:hover:bg-black disabled:hover:text-gray-400 text-gray-900 mt-2 bg-neutral-900  w-[100px] hover:bg-gray-900 focus:ring-4 focus:outline-none
          focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-6 mb-2 dark:border-gray-600 dark:text-gray-400
           dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 "
                   >
