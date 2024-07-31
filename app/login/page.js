@@ -1,22 +1,26 @@
 "use client"
 
+
 import React,{useEffect} from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import {useRouter} from 'next/navigation'
 
 
 
+
   const Login = () => {
     const { data: session } = useSession();
     const router = useRouter();
+    
   
     useEffect(() => {
+      document.title= "Login - Get Me A Chai"
       if (session) {
         router.push('/dashboard');
       }
     }, [session, router]);
   return (
-     
+    
     <div>
         <div className='mx-auto flex flex-col w-[70vw]   items-center'>
     <div className='text-white text-3xl flex   mt-10'>
@@ -58,7 +62,11 @@ Sign in with Apple
     </div>
     </div>
     
+    
   )
+  
 }
-
 export default Login
+
+
+

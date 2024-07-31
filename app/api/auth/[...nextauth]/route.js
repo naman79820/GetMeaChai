@@ -42,13 +42,10 @@ export const authoption = NextAuth({
       if (account.provider === 'github') {
         try {
           await connectDB();
-          console.log('Connected to MongoDB');
+         
 
           // Logging inputs to diagnose issues
-          console.log('User:', user);
-          console.log('Account:', account);
-          console.log('Profile:', profile);
-          console.log('Email:', email);
+       
 
           // Extract email from profile if not provided
           const userEmail = email || profile.email;
@@ -64,7 +61,7 @@ export const authoption = NextAuth({
             });
             await newUser.save();
             user.name = newUser.username;
-            console.log(newUser + "hii");
+          
           } else {
             user.name = currentUser.username;
           }
