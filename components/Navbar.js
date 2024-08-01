@@ -9,7 +9,7 @@ const Navbar = () => {
   const [showDropdown, setshowDropdown] = useState(false);
 
   return (
-    <nav className="w-full fixed z-10">
+    <nav className="w-full fixed z-10 max-[1512px]:static">
       <div className={`h-12 flex justify-between max-[740px]:justify-items-start   px-4 max-[740px]:px-0 max-[740px]:mr-5 max-[600px]:text-sm max-[600px]:pb-2 ${session ? "max-[640px]:flex-col max-[640px]:items-center" : ""}`}>
         <Link href="/" className="logo flex items-center font-bold text-white mt-2 cursor-pointer">
           <span>
