@@ -16,44 +16,55 @@ const Dashboard = (params) => {
   useEffect(() => {
     if (status === "loading") return; // Wait for the session to load
     if (!session) {
-      router.push("/login");
+        router.push("/login");
     } else {
-      getData();
+      
+        getData();
     }
-  }, [session, status]);
+}, [session, status]);
 
-   const getData= async()=>{
-    let u = await fetchuser(session.user.name)
-setform (u)
-   }
+const getData = async () => {
+  try {
+      if (!session || !session.user || !session.user.name) {
+          throw new Error('User session is not available or username is missing');
+      }
+     
+      let u = await fetchuser(session.user.name);
+      
+      setform(u);
+  } catch (error) {
+      console.error(error);
+      toast.error('Failed to fetch user data');
+  }
+};
 
-   const handleSubmit =async(e)=>{
+ const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
+  try {
+      if (!form.username) {
+          throw new Error('Username is missing');
+      }
     
-  let a = await updateProfile(e , session.user.name)
-  
-   
- {
-     toast('Profile has been saved!', {
-       position: "top-right",
-       autoClose: 3000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: "dark",
-       transition: Bounce,
-       });
-       
-    
- 
-    }
-   
-    
-  
-   
-   }
-
+      let result = await updateProfile(form, session.user.name);
+      if (result.error) {
+          throw new Error(result.error);
+      }
+      toast('Profile has been saved!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+      });
+  } catch (error) {
+      console.error('Error saving profile:', error);
+      toast.error('Failed to save profile');
+  }
+};
 
 
 
@@ -80,7 +91,7 @@ theme="dark"
        <p> Welcome to your Dashboard</p>
        
       </div>
-      <form action={handleSubmit}>
+      <form onSubmit={handleSubmit}>
       <div className=' w-[40vw] mx-auto max-[580px]:ml-20 max-[900px]:ml-40 max-[430px]:ml-10'  >
         <p className='text-white'>Name</p>
         <input value={form.name?form.name:""} onChange={handleChange} type="text" name="name" id="name"  className='bg-neutral-800 w-[32vw] max-[900px]:w-[120%] max-[430px]:w-[200%] max-[900px]:mr-10 max-[580px]:w-[150%] max-[580px]:mx-0 mx-auto pl-2 h-10 mt-2 rounded-md text-white'/>
