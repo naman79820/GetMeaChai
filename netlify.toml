@@ -1,6 +1,5 @@
-[build]
-  publish = "public"
-  functions = "netlify/functions"
-
 [functions]
-  timeout = 20
+  node_bundler = "esbuild"
+
+[functions.timeout]
+  duration = "20s"
