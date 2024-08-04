@@ -1,6 +1,6 @@
 {
     "functions": {
-      "login/page.js": {
+      "app/login/page.js": {
         "maxDuration": 25
       }
     }
