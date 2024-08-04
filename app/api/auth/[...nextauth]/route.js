@@ -21,6 +21,7 @@ export const authoption = NextAuth({
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      authorizationUrl: 'https://github.com/login/oauth/authorize',
     }),
     // AppleProvider({
     //   clientId: process.env.APPLE_ID,
