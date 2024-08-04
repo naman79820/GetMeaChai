@@ -38,6 +38,7 @@ export const authoption = NextAuth({
     // }),
   ],
    callbacks: {
+    
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === 'github') {
         try {
@@ -78,5 +79,7 @@ export const authoption = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
 })
 
+
 export { authoption as GET, authoption as POST };
+
 
