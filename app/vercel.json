@@ -1,8 +1,8 @@
 {
   
     "functions": {
-      "api/auth/callback/github": {
-        "maxDuration": 20
+      "api/auth/[...nextauth]/route.js": {
+        "maxDuration": 25
       }
     }
   }
