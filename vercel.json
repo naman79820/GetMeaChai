@@ -1,7 +1,7 @@
 {
     "functions": {
-      "api/auth/**/*.js": {
-        "maxDuration": 30
+      "login/page.js": {
+        "maxDuration": 25
       }
     }
-  }
+}
