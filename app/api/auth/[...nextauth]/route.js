@@ -11,6 +11,10 @@ import User from "@/models/User";
 import Payment from "@/models/Payment";
 import connectDB from "@/db/connectDb";
 
+export const config = {
+  maxDuration: 25,
+};
+
 export const authoption = NextAuth({
   providers: [
     // OAuth authentication providers...

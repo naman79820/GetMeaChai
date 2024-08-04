@@ -1,5 +1,7 @@
 "use client"
-
+export const config = {
+  maxDuration: 25,
+};
 
 import React,{useEffect} from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
